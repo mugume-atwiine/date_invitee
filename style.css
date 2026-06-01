@@ -1,0 +1,75 @@
+body {
+  margin: 0;
+  font-family: -apple-system, sans-serif;
+  background: linear-gradient(135deg, #0f0f0f, #1c1c1c);
+  color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  overflow: hidden;
+}
+
+.container {
+  width: 90%;
+  max-width: 420px;
+  position: relative;
+}
+
+/* Screens */
+.screen {
+  position: absolute;
+  width: 100%;
+  opacity: 0;
+  transform: translateX(50px);
+  transition: all 0.4s ease;
+  pointer-events: none;
+}
+
+.screen.active {
+  opacity: 1;
+  transform: translateX(0);
+  pointer-events: all;
+}
+
+/* Buttons */
+button {
+  width: 100%;
+  padding: 14px;
+  margin-top: 10px;
+  border: none;
+  border-radius: 14px;
+  font-size: 16px;
+}
+
+.primary {
+  background: white;
+  color: black;
+}
+
+.secondary {
+  background: transparent;
+  border: 1px solid rgba(255,255,255,0.3);
+  color: white;
+}
+
+/* NO button */
+#noBtn {
+  position: absolute;
+  background: #ff4d6d;
+  color: white;
+  border-radius: 20px;
+  padding: 10px 18px;
+  font-weight: bold;
+}
+
+/* GIF */
+.hidden {
+  display: none;
+}
+
+#catGif {
+  margin-top: 15px;
+  border-radius: 15px;
+  overflow: hidden;
+}
