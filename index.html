@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<head>
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<div class="container">
+  <h1 id="titleText"></h1>
+  <button class="primary" onclick="start()">Yes ❤️</button>
+  <button id="noBtn">No</button>
+</div>
+
+<audio id="bgMusic" loop>
+  <source src="audio/romantic.mp3">
+</audio>
+
+<script>
+const yourName = "Atwiine";
+const herName = "Isabel";
+
+document.getElementById("titleText").innerText =
+`${herName}, will you go on a date with ${yourName}? ❤️`;
+
+const noBtn = document.getElementById("noBtn");
+noBtn.onmouseover = () => {
+  noBtn.style.position = "absolute";
+  noBtn.style.top = Math.random()*80+"%";
+  noBtn.style.left = Math.random()*80+"%";
+};
+
+function start() {
+  const music = document.getElementById("bgMusic");
+  music.volume = 0;
+  music.play();
+
+  let v = 0;
+  let fade = setInterval(()=>{
+    if(v<0.5){ v+=0.05; music.volume=v;}
+    else clearInterval(fade);
+  },200);
+
+  localStorage.setItem("musicPlaying", "true");
+
+  setTimeout(()=>{
+    window.location.href = "day.html";
+  }, 500);
+}
+</script>
+
+</body>
+</html>

@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+<head>
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<div class="container">
+  <h1>Pick a time</h1>
+  <button onclick="pick('Morning')">Morning</button>
+  <button onclick="pick('Afternoon')">Afternoon</button>
+  <button onclick="pick('Evening')">Evening</button>
+</div>
+
+<script>
+function pick(time){
+  localStorage.setItem("time", time);
+  window.location.href = "final.html";
+}
+</script>
+
+</body>
+</html>

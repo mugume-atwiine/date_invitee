@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head>
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<div class="container">
+  <h1 id="title"></h1>
+  <div id="options"></div>
+  <button onclick="back()">← Change day</button>
+</div>
+
+<script>
+const day = localStorage.getItem("day");
+document.getElementById("title").innerText = day + " options";
+
+const optionsDiv = document.getElementById("options");
+
+function add(name){
+  const btn = document.createElement("button");
+  btn.innerText = name;
+  btn.onclick = ()=>{
+    localStorage.setItem("place", name);
+    window.location.href = "time.html";
+  };
+  optionsDiv.appendChild(btn);
+}
+
+if(day==="Saturday"){
+  add("Jahazi Pier – Munyonyo");
+  add("Usawa Cafe – Naguru");
+}else{
+  add("Paint & Chicken – Chop House Gardens");
+  add("Le Botti Clubbing");
+}
+
+function back(){
+  window.location.href = "day.html";
+}
+</script>
+
+</body>
+</html>

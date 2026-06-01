@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+<head>
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<div class="container">
+  <h1>Pick a day</h1>
+  <button onclick="pick('Saturday')">Saturday</button>
+  <button onclick="pick('Sunday')">Sunday</button>
+</div>
+
+<script>
+function pick(day){
+  localStorage.setItem("day", day);
+  window.location.href = "options.html";
+}
+</script>
+
+</body>
+</html>

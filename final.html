@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head>
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<div class="container">
+  <h1>It’s a date ❤️</h1>
+  <p id="result"></p>
+  <p>I love you 💕</p>
+
+  <div class="tenor-gif-embed"
+       data-postid="9168835756461277783"
+       data-share-method="host"
+       data-width="100%">
+  </div>
+</div>
+
+<script>
+const day = localStorage.getItem("day");
+const place = localStorage.getItem("place");
+const time = localStorage.getItem("time");
+
+document.getElementById("result").innerText =
+`${day} • ${place} • ${time}`;
+</script>
+
+<script async src="https://tenor.com/embed.js"></script>
+
+</body>
+</html>
