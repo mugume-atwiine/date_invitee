@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>A Special Question ❤️</title>
+
+<style>
+body {
+  font-family: system-ui, -apple-system, sans-serif;
+  background: linear-gradient(135deg, #ff9a9e, #fad0c4);
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0;
+}
+
+.card {
+  background: white;
+  border-radius: 20px;
+  padding: 30px 24px;
+  max-width: 420px;
+  width: 90%;
+  text-align: center;
+  box-shadow: 0 20px 40px rgba(0,0,0,0.15);
+  position: relative;
+}
+
+h1 { color: #e63946; }
+p { font-size: 1.05rem; }
+
+button {
+  font-size: 1rem;
+  padding: 12px 22px;
+  border-radius: 999px;
+  border: none;
+  cursor: pointer;
+  margin: 8px;
+}
+
+.yes { background: #e63946; color: white; }
+.no { background: #eee; }
+
+img {
+  width: 100%;
+  border-radius: 14px;
+  margin-top: 10px;
+}
+
+.hidden { display: none; }
+</style>
+</head>
+
+<body>
+
+<div class="card">
+
+  <!-- AUDIO -->
+  <audio id="bgMusic" loop>
+    <source src="audio/romantic.mp3">
+  </audio>
+
+  <!-- STEP 1 -->
+  <div id="step1">
+    <h1 id="title"></h1>
+    <p id="question">Will you go on a date with me? 😌</p>
+
+    <button class="yes" onclick="start()">Yes ❤️</button>
+    <button class="no" id="noBtn">No 🙈</button>
+  </div>
+
+  <!-- STEP 2 -->
+  <div id="step2" class="hidden">
+    <h1>Pick a day</h1>
+    <button onclick="chooseDay('Saturday')">Saturday</button>
+    <button onclick="chooseDay('Sunday')">Sunday</button>
+  </div>
+
+  <!-- STEP 3 -->
+  <div id="step3" class="hidden">
+    <h1 id="dayTitle"></h1>
+    <div id="options"></div>
+    <button onclick="back()">← Back</button>
+  </div>
+
+  <!-- STEP 4 -->
+  <div id="step4" class="hidden">
+    <h1>Pick a time</h1>
+    <button onclick="finish('Morning ☀️')">Morning</button>
+    <button onclick="finish('Afternoon 🌤️')">Afternoon</button>
+    <button onclick="finish('Evening 🌙')">Evening</button>
+  </div>
+
+  <!-- FINAL -->
+  <div id="final" class="hidden">
+    <h1>It’s a date ❤️</h1>
+    <p id="result"></p>
+    <p>I love you. I can’t wait to see you 💕</p>
+
+    <div class="tenor-gif-embed"
+      data-postid="9168835756461277783"
+      data-share-method="host"
+      data-width="100%">
+    </div>
+
+    <p style="margin-top:15px;"><strong>— Atwiine ❤️</strong></p>
+  </div>
+
+</div>
+
+<script>
+const herName = "Isabel";
+document.getElementById("title").innerText =
+`Hey ${herName} ❤️`;
+
+
+// ===== MUSIC (user interaction safe)
+const music = document.getElementById("bgMusic");
+
+document.addEventListener("click", () => {
+  music.play().catch(()=>{});
+}, { once: true });
+
+
+// ===== NO BUTTON BEHAVIOR
+let noCount = 0;
+const messages = [
+  "Are you sure? 🥺",
+  "Think again… 💭",
+  "I promise good vibes 😌",
+  "Don’t do this 😭",
+  "You know it’s a yes ❤️"
+];
+
+const noBtn = document.getElementById("noBtn");
+const question = document.getElementById("question");
+const card = document.querySelector(".card");
+
+noBtn.addEventListener("mouseenter", moveNo);
+noBtn.addEventListener("click", () => {
+  question.textContent = messages[noCount % messages.length];
+  noCount++;
+});
+
+function moveNo() {
+  const rect = card.getBoundingClientRect();
+  const maxX = rect.width - 100;
+  const maxY = rect.height - 50;
+
+  noBtn.style.position = "absolute";
+  noBtn.style.left = Math.random()*maxX + "px";
+  noBtn.style.top = Math.random()*maxY + "px";
+}
+
+
+// ===== FLOW
+let selectedDay = "";
+let selectedPlace = "";
+
+function start() {
+  show("step2");
+}
+
+function chooseDay(day) {
+  selectedDay = day;
+  show("step3");
+
+  const title = document.getElementById("dayTitle");
+  const options = document.getElementById("options");
+
+  title.innerText = day + " options";
+  options.innerHTML = "";
+
+  if(day==="Saturday"){
+    addOption("Jahazi Pier – Munyonyo", "images/jahazi.jpg");
+    addOption("Cantine Davino – Kololo", "images/usawa.jpg");
+  } else {
+    addOption("Paint & Chicken – Chop House Gardens", "images/chophouse.jpg");
+    addOption("Le Botti Clubbing", "images/lebotti.jpg");
+  }
+}
+
+function addOption(name, img){
+  const div = document.createElement("div");
+
+  div.innerHTML = `
+    <button>${name}</button>
+    <img src="${img}">
+  `;
+
+  div.querySelector("button").onclick = () => {
+    selectedPlace = name;
+    show("step4");
+  };
+
+  document.getElementById("options").appendChild(div);
+}
+
+function finish(time){
+  document.getElementById("result").innerText =
+  `${selectedDay} • ${selectedPlace} • ${time}`;
+
+  show("final");
+}
+
+function back(){
+  show("step2");
+}
+
+function show(id){
+  ["step1","step2","step3","step4","final"].forEach(s=>{
+    document.getElementById(s).classList.add("hidden");
+  });
+
+  document.getElementById(id).classList.remove("hidden");
+}
+</script>
+
+<script async src="https://tenor.com/embed.js"></script>
+
+</body>
+</html>
